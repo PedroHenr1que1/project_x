@@ -48,10 +48,8 @@ export default function NewBookPage() {
   }
 
   return (
-    // Fundo Principal Escuro
     <div className="min-h-screen bg-gray-900">
       
-      {/* Barra de Navegação Escura */}
       <nav className="bg-gray-800 shadow-xl border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center h-16">
@@ -70,7 +68,6 @@ export default function NewBookPage() {
 
       <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         
-        {/* Cartão do Formulário Escuro */}
         <div className="bg-gray-800 rounded-xl shadow-2xl p-8 border border-gray-700">
           <h1 className="text-3xl font-extrabold text-white mb-8 border-b border-gray-700 pb-4">
             Adicionar Novo Livro
@@ -142,7 +139,6 @@ export default function NewBookPage() {
             </div>
 
             <div className="flex gap-4 pt-4">
-              {/* Botão Principal com Gradiente Vibrante */}
               <button
                 type="submit"
                 disabled={loading}
@@ -151,7 +147,6 @@ export default function NewBookPage() {
                 {loading ? 'Salvando...' : 'Salvar Livro'}
               </button>
               
-              {/* Botão Cancelar Secundário */}
               <Link
                 href="/dashboard"
                 className="flex-1 py-3 bg-gray-700 text-gray-300 rounded-lg hover:bg-gray-600 transition-colors font-semibold text-center shadow-md"

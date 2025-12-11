@@ -64,16 +64,13 @@ export default function PaymentsPage() {
     }
   }
 
-  // NOVA FUNÇÃO: Limpa todos os estados do formulário
   const handleNewTransaction = () => {
     setTransaction(null);
     setQrCodeImage('');
     setShowQrCodeImage(false);
     setError('');
     
-    // Limpar campos do formulário
     setName('');
-    // Mantém o email do usuário logado se estiver disponível
     setEmail(session?.user?.email || ''); 
     setPhone('');
     setAmount('');

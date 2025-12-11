@@ -75,7 +75,6 @@ export default function EditBookPage() {
 
   if (loading) {
     return (
-      // Loading state no fundo escuro
       <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
         <div className="text-xl">Carregando...</div>
       </div>
@@ -83,7 +82,6 @@ export default function EditBookPage() {
   }
 
   return (
-    // Fundo Principal Escuro
     <div className="min-h-screen bg-gray-900">
       
       {/* Barra de Navegação Escura */}
@@ -112,7 +110,6 @@ export default function EditBookPage() {
           </h1>
 
           {error && (
-            // Mensagem de erro estilizada para o tema escuro
             <div className="mb-6 p-4 bg-red-800/50 border border-red-600 text-red-300 rounded-lg">
               {error}
             </div>

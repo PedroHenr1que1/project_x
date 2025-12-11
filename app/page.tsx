@@ -2,32 +2,26 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    // Fundo escuro com gradiente sutil e transição suave
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
       <div className="max-w-4xl mx-auto px-4 py-12 text-center">
         
-        {/* Título Principal com cor de destaque */}
         <h1 className="text-6xl sm:text-7xl font-extrabold mb-4 tracking-tight">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
             Biblioteca Digital
           </span>
         </h1>
         
-        {/* Subtítulo com opacidade para contraste suave */}
         <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
           Gerencie sua coleção de livros e simplifique suas transações com a integração PIX Payevo.
         </p>
         
-        {/* Seção de Ações (Botões) */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          {/* Botão Primário (Vibrante) */}
           <Link
             href="/login"
             className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl shadow-lg hover:shadow-xl hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 font-bold transform hover:scale-105"
           >
             Acessar Conta
           </Link>
-          {/* Botão Secundário (Contorno Moderno) */}
           <Link
             href="/register"
             className="px-8 py-3 text-cyan-400 border-2 border-cyan-500 rounded-xl hover:bg-cyan-900/50 transition-colors duration-300 font-semibold transform hover:scale-105"
@@ -36,9 +30,7 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* Seção de Funcionalidades (Cartões) */}
         <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Cartão 1: Gerenciamento */}
           <div className="bg-gray-800 p-8 rounded-2xl shadow-2xl border border-gray-700/50 hover:border-cyan-500 transition-all duration-300">
             <div className="text-4xl mb-3 text-cyan-400">
               📚
@@ -51,7 +43,6 @@ export default function Home() {
             </p>
           </div>
           
-          {/* Cartão 2: Pagamentos */}
           <div className="bg-gray-800 p-8 rounded-2xl shadow-2xl border border-gray-700/50 hover:border-blue-500 transition-all duration-300">
             <div className="text-4xl mb-3 text-blue-400">
               ⚡
