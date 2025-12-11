@@ -75,38 +75,53 @@ export default function EditBookPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      // Loading state no fundo escuro
+      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
         <div className="text-xl">Carregando...</div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm">
+    // Fundo Principal Escuro
+    <div className="min-h-screen bg-gray-900">
+      
+      {/* Barra de Navegação Escura */}
+      <nav className="bg-gray-800 shadow-xl border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center h-16">
-            <Link href="/dashboard" className="text-blue-600 hover:underline">
-              ← Voltar para Dashboard
+            <Link 
+              href="/dashboard" 
+              className="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-2"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Voltar para Dashboard
             </Link>
           </div>
         </div>
       </nav>
 
-      <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-lg shadow-md p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-6">Editar Livro</h1>
+      <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        {/* Cartão do Formulário Escuro */}
+        <div className="bg-gray-800 rounded-xl shadow-2xl p-8 border border-gray-700">
+          <h1 className="text-3xl font-extrabold text-white mb-8 border-b border-gray-700 pb-4">
+            Editar Livro
+          </h1>
 
           {error && (
-            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+            // Mensagem de erro estilizada para o tema escuro
+            <div className="mb-6 p-4 bg-red-800/50 border border-red-600 text-red-300 rounded-lg">
               {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
-                Título *
+              <label htmlFor="title" className="block text-sm font-medium text-gray-300 mb-1">
+                Título <span className="text-red-500">*</span>
               </label>
               <input
                 id="title"
@@ -114,14 +129,14 @@ export default function EditBookPage() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
                 placeholder="Digite o título do livro"
               />
             </div>
 
             <div>
-              <label htmlFor="author" className="block text-sm font-medium text-gray-700 mb-1">
-                Autor *
+              <label htmlFor="author" className="block text-sm font-medium text-gray-300 mb-1">
+                Autor <span className="text-red-500">*</span>
               </label>
               <input
                 id="author"
@@ -129,13 +144,13 @@ export default function EditBookPage() {
                 value={author}
                 onChange={(e) => setAuthor(e.target.value)}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
                 placeholder="Digite o nome do autor"
               />
             </div>
 
             <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="description" className="block text-sm font-medium text-gray-300 mb-1">
                 Descrição
               </label>
               <textarea
@@ -143,13 +158,13 @@ export default function EditBookPage() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
                 placeholder="Digite uma breve descrição do livro"
               />
             </div>
 
             <div>
-              <label htmlFor="publishedAt" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="publishedAt" className="block text-sm font-medium text-gray-300 mb-1">
                 Ano de Publicação
               </label>
               <input
@@ -157,22 +172,25 @@ export default function EditBookPage() {
                 type="text"
                 value={publishedAt}
                 onChange={(e) => setPublishedAt(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
                 placeholder="Ex: 2023"
               />
             </div>
 
             <div className="flex gap-4 pt-4">
+              {/* Botão Principal com Gradiente Vibrante */}
               <button
                 type="submit"
                 disabled={saving}
-                className="flex-1 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg hover:from-cyan-400 hover:to-blue-500 transition-all font-bold shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {saving ? 'Salvando...' : 'Salvar Alterações'}
               </button>
+              
+              {/* Botão Cancelar Secundário */}
               <Link
                 href="/dashboard"
-                className="flex-1 py-3 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors font-semibold text-center"
+                className="flex-1 py-3 bg-gray-700 text-gray-300 rounded-lg hover:bg-gray-600 transition-colors font-semibold text-center shadow-md"
               >
                 Cancelar
               </Link>

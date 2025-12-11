@@ -2,46 +2,65 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="max-w-4xl mx-auto px-4 text-center">
-        <h1 className="text-5xl font-bold text-gray-900 mb-6">
-          Sistema de Biblioteca
+    // Fundo escuro com gradiente sutil e transição suave
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
+      <div className="max-w-4xl mx-auto px-4 py-12 text-center">
+        
+        {/* Título Principal com cor de destaque */}
+        <h1 className="text-6xl sm:text-7xl font-extrabold mb-4 tracking-tight">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+            Biblioteca Digital
+          </span>
         </h1>
-        <p className="text-xl text-gray-600 mb-8">
-          Gerencie seus livros e realize pagamentos PIX de forma simples e segura
+        
+        {/* Subtítulo com opacidade para contraste suave */}
+        <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+          Gerencie sua coleção de livros e simplifique suas transações com a integração PIX Payevo.
         </p>
         
+        {/* Seção de Ações (Botões) */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {/* Botão Primário (Vibrante) */}
           <Link
             href="/login"
-            className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+            className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl shadow-lg hover:shadow-xl hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 font-bold transform hover:scale-105"
           >
-            Fazer Login
+            Acessar Conta
           </Link>
+          {/* Botão Secundário (Contorno Moderno) */}
           <Link
             href="/register"
-            className="px-8 py-3 bg-white text-blue-600 border-2 border-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-semibold"
+            className="px-8 py-3 text-cyan-400 border-2 border-cyan-500 rounded-xl hover:bg-cyan-900/50 transition-colors duration-300 font-semibold transform hover:scale-105"
           >
-            Criar Conta
+            Criar Nova Conta
           </Link>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-3">
-              📚 Gerenciamento de Livros
+        {/* Seção de Funcionalidades (Cartões) */}
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Cartão 1: Gerenciamento */}
+          <div className="bg-gray-800 p-8 rounded-2xl shadow-2xl border border-gray-700/50 hover:border-cyan-500 transition-all duration-300">
+            <div className="text-4xl mb-3 text-cyan-400">
+              📚
+            </div>
+            <h2 className="text-2xl font-bold text-white mb-3">
+              Gestão de Acervo
             </h2>
-            <p className="text-gray-600">
-              Cadastre, edite e organize sua coleção de livros de forma intuitiva
+            <p className="text-gray-400">
+              Cadastre, organize e mantenha o controlo completo sobre a sua biblioteca digital.
             </p>
           </div>
           
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-3">
-              💳 Pagamentos PIX
+          {/* Cartão 2: Pagamentos */}
+          <div className="bg-gray-800 p-8 rounded-2xl shadow-2xl border border-gray-700/50 hover:border-blue-500 transition-all duration-300">
+            <div className="text-4xl mb-3 text-blue-400">
+              ⚡
+            </div>
+            <h2 className="text-2xl font-bold text-white mb-3">
+              Transações Instantâneas
             </h2>
-            <p className="text-gray-600">
-              Realize transações PIX de forma rápida e segura através da integração com Payevo
+            <p className="text-gray-400">
+              Fácil integração de pagamentos e recebimentos usando o PIX, powered by Payevo.
             </p>
           </div>
         </div>

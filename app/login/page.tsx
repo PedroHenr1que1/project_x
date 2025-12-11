@@ -38,21 +38,26 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-indigo-100 px-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6 text-center">
-          Login
+    // Fundo Escuro
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4">
+      {/* Cartão do Formulário (Dark Card) */}
+      <div className="max-w-md w-full bg-gray-800 rounded-xl shadow-2xl p-8 border border-gray-700">
+        
+        {/* Título */}
+        <h1 className="text-3xl font-extrabold text-white mb-8 text-center tracking-wide">
+          Acesso à Conta
         </h1>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+          <div className="mb-6 p-4 bg-red-800/50 border border-red-600 text-red-300 rounded-lg">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Campo Email */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
               Email
             </label>
             <input
@@ -61,13 +66,14 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 placeholder-gray-500 transition-colors"
               placeholder="seu@email.com"
             />
           </div>
 
+          {/* Campo Senha */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-1">
               Senha
             </label>
             <input
@@ -76,30 +82,32 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 placeholder-gray-500 transition-colors"
               placeholder="••••••••"
             />
           </div>
 
+          {/* Botão de Submissão (Vibrante) */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-3 mt-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg shadow-lg hover:shadow-xl hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 font-bold disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? 'Entrando...' : 'Entrar'}
+            {loading ? 'Verificando credenciais...' : 'Entrar'}
           </button>
         </form>
 
-        <p className="mt-6 text-center text-gray-600">
+        {/* Links de Rodapé */}
+        <p className="mt-8 text-center text-gray-400">
           Não tem uma conta?{' '}
-          <Link href="/register" className="text-blue-600 hover:underline font-semibold">
+          <Link href="/register" className="text-cyan-400 hover:text-cyan-300 hover:underline font-semibold transition-colors">
             Cadastre-se
           </Link>
         </p>
 
         <p className="mt-4 text-center">
-          <Link href="/" className="text-gray-500 hover:text-gray-700 text-sm">
-            ← Voltar para home
+          <Link href="/" className="text-gray-500 hover:text-gray-300 text-sm transition-colors">
+            ← Voltar para a página inicial
           </Link>
         </p>
       </div>

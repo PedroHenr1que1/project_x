@@ -63,7 +63,7 @@ export default function DashboardPage() {
 
   if (status === 'loading' || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
         <div className="text-xl">Carregando...</div>
       </div>
     )
@@ -72,22 +72,27 @@ export default function DashboardPage() {
   if (!session) return null
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm">
+    <div className="min-h-screen bg-gray-900">
+      
+      <nav className="bg-gray-800 shadow-xl border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <h1 className="text-2xl font-bold text-gray-900">Minha Biblioteca</h1>
+          <div className="flex justify-between items-center h-20">
+            <h1 className="text-3xl font-extrabold text-white tracking-wide">
+              📚 Biblioteca
+            </h1>
             <div className="flex items-center gap-4">
-              <span className="text-gray-600">Olá, {session.user?.name}</span>
+              <span className="text-gray-400 hidden sm:inline">Olá, <span className="text-cyan-400 font-semibold">{session.user?.name}</span></span>
+              
               <Link
                 href="/payments"
-                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+                className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-semibold shadow-md"
               >
                 Pagamentos PIX
               </Link>
+              
               <button
                 onClick={() => signOut({ callbackUrl: '/' })}
-                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold shadow-md"
               >
                 Sair
               </button>
@@ -96,55 +101,61 @@ export default function DashboardPage() {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl font-bold text-gray-900">Meus Livros</h2>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <div className="flex justify-between items-center mb-10 border-b border-gray-700 pb-4">
+          <h2 className="text-4xl font-extrabold text-white">Meus Livros</h2>
+          
           <Link
             href="/dashboard/books/new"
-            className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-semibold"
+            className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg shadow-lg hover:shadow-xl hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 font-bold transform hover:scale-105"
           >
             + Adicionar Livro
           </Link>
         </div>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+          <div className="mb-6 p-4 bg-red-800/50 border border-red-600 text-red-300 rounded-lg">
             {error}
           </div>
         )}
 
         {books.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-lg shadow">
-            <p className="text-gray-600 text-lg mb-4">Nenhum livro cadastrado ainda</p>
+          <div className="text-center py-16 bg-gray-800 rounded-xl shadow-xl border border-gray-700">
+            <p className="text-gray-400 text-xl mb-4">Nenhum livro cadastrado ainda</p>
             <Link
               href="/dashboard/books/new"
-              className="text-blue-600 hover:underline font-semibold"
+              className="text-cyan-400 hover:text-cyan-300 hover:underline font-semibold transition-colors"
             >
               Adicione seu primeiro livro
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {books.map((book) => (
-              <div key={book.id} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{book.title}</h3>
-                <p className="text-gray-600 mb-2">por {book.author}</p>
+              
+              <div key={book.id} className="bg-gray-800 rounded-xl shadow-xl p-6 border border-gray-700 hover:border-blue-500 transition-all duration-300">
+                <h3 className="text-2xl font-bold text-white mb-2 line-clamp-2">{book.title}</h3>
+                <p className="text-gray-400 mb-2">por <span className="font-semibold">{book.author}</span></p>
+                
                 {book.description && (
-                  <p className="text-gray-500 text-sm mb-3 line-clamp-3">{book.description}</p>
+                  <p className="text-gray-500 text-sm mb-4 line-clamp-3">{book.description}</p>
                 )}
+                
                 {book.publishedAt && (
-                  <p className="text-gray-400 text-sm mb-4">Publicado em: {book.publishedAt}</p>
+                  <p className="text-gray-600 text-xs mb-4 pt-2 border-t border-gray-700">Publicado em: {book.publishedAt}</p>
                 )}
-                <div className="flex gap-2">
+                
+                <div className="flex gap-3 pt-3 border-t border-gray-700">
                   <Link
                     href={`/dashboard/books/${book.id}/edit`}
-                    className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-center"
+                    className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-center font-semibold text-sm shadow-md"
                   >
                     Editar
                   </Link>
                   <button
                     onClick={() => handleDelete(book.id)}
-                    className="flex-1 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+                    className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold text-sm shadow-md"
                   >
                     Deletar
                   </button>
