@@ -69,9 +69,9 @@ Preencha as variáveis com seus dados. **Atenção à `DATABASE_URL` do Supabase
 
 | Variável | Descrição | Valor de Exemplo |
 | :--- | :--- | :--- |
-| `DATABASE_URL` | String de conexão do seu banco de dados **Supabase** | `url-bancodedados` |
-| `DIRECT_URL` | String de conexão do seu banco de dados **Supabase** | `url-direta` |
-| `NEXTAUTH_URL` | URL da aplicação (vercel) | `https://project-x-five-psi.vercel.app` |
+| `DATABASE_URL` | String de conexão do Supabase para o RUNTIME (Pooler 6543) **Supabase** | `url-bancodedados` |
+| `DIRECT_URL` | String de conexão do Supabase para o BUILD TIME (Direta 5432) **Supabase** | `url-direta` |
+| `NEXTAUTH_URL` | URL da aplicação (vercel) | `url-da-aplicacao-na-vercel` |
 | `NEXTAUTH_SECRET` | Chave secreta para JWT (gere uma string longa e aleatória) | `sua-chave-secreta-aqui` |
 | `PAYEVO_API_KEY` | Chave da API de Pagamento (simulada) | `sua-key-aqui` |
 
