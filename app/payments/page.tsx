@@ -18,6 +18,8 @@ export default function PaymentsPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
   const [name, setName] = useState('')
+  const [email, setEmail] = useState(session?.user?.email || '') // NOVO ESTADO
+  const [phone, setPhone] = useState('') // NOVO ESTADO
   const [amount, setAmount] = useState('')
   const [document, setDocument] = useState('')
   const [description, setDescription] = useState('')
@@ -37,6 +39,13 @@ export default function PaymentsPage() {
       generateQRCode(transaction.pixCode)
     }
   }, [transaction])
+  
+  // Pré-preencher email do usuário logado, se disponível
+  useEffect(() => {
+    if (session?.user?.email) {
+      setEmail(session.user.email);
+    }
+  }, [session]);
 
   const generateQRCode = async (pixCode: string) => {
     try {
@@ -59,6 +68,8 @@ export default function PaymentsPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name,
+          email, // NOVO!
+          phone: phone.replace(/\D/g, ''), // ENVIAR APENAS NÚMEROS
           amount: parseFloat(amount),
           document: document.replace(/\D/g, ''),
           description
@@ -68,7 +79,17 @@ export default function PaymentsPage() {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || 'Erro ao criar transação')
+        let errorMessage = data.error || 'Erro ao criar transação'
+        
+        if (data.details && typeof data.details === 'object') {
+             if (data.details.raw_error) {
+                 errorMessage += ` Detalhe: ${data.details.raw_error.substring(0, 50)}...`
+             } else if (data.details.message) {
+                 errorMessage += ` Detalhe: ${data.details.message}`
+             }
+        }
+        
+        throw new Error(errorMessage)
       }
 
       setTransaction(data.transaction)
@@ -101,10 +122,23 @@ export default function PaymentsPage() {
       .replace(/(\d{3})(\d)/, '$1.$2')
       .replace(/(\d{3})(\d{1,2})$/, '$1-$2')
   }
+  
+  const formatPhone = (value: string) => {
+    const numericValue = value.replace(/\D/g, '')
+    return numericValue
+      .replace(/(\d{2})(\d)/, '($1) $2')
+      .replace(/(\d{5})(\d)/, '$1-$2')
+      .replace(/(-\d{4})\d+?$/, '$1')
+  }
 
   const handleDocumentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatCPF(e.target.value)
     setDocument(formatted)
+  }
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhone(e.target.value)
+    setPhone(formatted)
   }
 
   if (status === 'loading') {
@@ -155,6 +189,37 @@ export default function PaymentsPage() {
                   required
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Nome completo"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  Email *
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="seuemail@exemplo.com"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  Telefone *
+                </label>
+                <input
+                  id="phone"
+                  type="text"
+                  value={phone}
+                  onChange={handlePhoneChange}
+                  required
+                  maxLength={15}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="(99) 99999-9999"
                 />
               </div>
 

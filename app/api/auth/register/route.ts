@@ -53,6 +53,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    console.error('Erro detalhado do servidor:', error)
+
     return NextResponse.json(
       { error: 'Erro ao criar usuário' },
       { status: 500 }

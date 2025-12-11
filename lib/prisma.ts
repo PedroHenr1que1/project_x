@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { PrismaNeon } from '@prisma/adapter-neon'
+import { Client as NeonClient } from '@neondatabase/serverless'
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined
@@ -12,9 +13,11 @@ function createPrismaClient() {
     throw new Error('DATABASE_URL is not defined')
   }
 
-  const adapter = new PrismaNeon({ connectionString })
+  const neon = new NeonClient({ connectionString })
   
-  return new PrismaClient({ adapter })
+  const adapter = new PrismaNeon(neon)
+  
+  return new PrismaClient({ adapter }) // <--- Isto satisfaz a regra "requires adapter"
 }
 
 export const prisma = globalForPrisma.prisma ?? createPrismaClient()
