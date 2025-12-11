@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client/edge';
 import { PrismaNeon } from '@prisma/adapter-neon'
 import { Client as NeonClient } from '@neondatabase/serverless'
 
@@ -14,10 +14,9 @@ function createPrismaClient() {
   }
 
   const neon = new NeonClient({ connectionString })
-  
   const adapter = new PrismaNeon(neon)
   
-  return new PrismaClient({ adapter }) // <--- Isto satisfaz a regra "requires adapter"
+  return new PrismaClient({ adapter })
 }
 
 export const prisma = globalForPrisma.prisma ?? createPrismaClient()
