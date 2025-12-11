@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Biblioteca - Desafio Fullstack",
+  title: "Project X",
   description: "Sistema de gerenciamento de biblioteca com autenticação e pagamentos PIX",
 };
 
