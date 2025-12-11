@@ -61,8 +61,13 @@ export default function EditBookPage() {
       }
 
       router.push('/dashboard')
-    } catch (error: any) {
-      setError(error.message)
+      
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('Ocorreu um erro desconhecido.');
+      }
     } finally {
       setSaving(false)
     }

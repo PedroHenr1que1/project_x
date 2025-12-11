@@ -72,10 +72,14 @@ export default function PaymentsPage() {
       }
 
       setTransaction(data.transaction)
-    } catch (error: any) {
-      setError(error.message)
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('Ocorreu um erro desconhecido.');
+      }
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
